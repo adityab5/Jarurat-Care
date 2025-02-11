@@ -3,6 +3,11 @@ import config from "../config/config.js";
 import User from "../models/User.js";
 
 export const authenticate = async (req, res, next) => {
+  
+  if (req.path === "/register" || req.path === "/login") {
+        return next();
+  }
+
   try {
     const token = req.header("Authorization")?.replace("Bearer ", "");
     if (!token) {
